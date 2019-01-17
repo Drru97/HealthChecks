@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HealthChecks.Server.Models;
 
-namespace HealthChecks.Server.Services
+namespace HealthChecks.Server.Services.Linux
 {
     public class LinuxMemoryStatusProvider : IMemoryStatusProvider
     {
