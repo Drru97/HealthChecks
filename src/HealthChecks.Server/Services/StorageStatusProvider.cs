@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using HealthChecks.Server.Models;
 
-namespace HealthChecks.Server.Services.Linux
+namespace HealthChecks.Server.Services
 {
-    public class LinuxStorageStatusProvider : IStorageStatusProvider
+    public class StorageStatusProvider : IStorageStatusProvider
     {
         private readonly IList<string> _allowedFilesystems = new List<string>
         {
