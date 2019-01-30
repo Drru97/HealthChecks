@@ -1,6 +1,7 @@
 ﻿using System;
 using HealthChecks.Server.Services;
 using HealthChecks.Server.Services.Linux;
+using HealthChecks.Server.Services.Windows;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,7 @@ namespace HealthChecks.Server
         private static void RegisterWindowsDependencies(IServiceCollection services)
         {
             // todo: register windows dependencies
+            services.AddTransient<ICpuStatusProvider, WindowsCpuStatusProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
