@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace HealthChecks.Server.Models
+namespace HealthChecks.Common.Models
 {
     public class Storage
     {

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
+using HealthChecks.Common.Models;
 using HealthChecks.Server.Models;
 
 namespace HealthChecks.Server.Services.Linux

@@ -1,4 +1,4 @@
-namespace HealthChecks.Server.Models
+namespace HealthChecks.Common.Models
 {
     public class Memory
     {

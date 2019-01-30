@@ -1,6 +1,8 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthChecks.Server", "src\HealthChecks.Server\HealthChecks.Server.csproj", "{432E368D-03AA-44BA-AA3E-264D9B9C0846}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthChecks.Common", "src\HealthChecks.Common\HealthChecks.Common.csproj", "{E5A38E1D-4C19-4D95-ADC5-2C88F05B3FAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{432E368D-03AA-44BA-AA3E-264D9B9C0846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{432E368D-03AA-44BA-AA3E-264D9B9C0846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{432E368D-03AA-44BA-AA3E-264D9B9C0846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A38E1D-4C19-4D95-ADC5-2C88F05B3FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A38E1D-4C19-4D95-ADC5-2C88F05B3FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A38E1D-4C19-4D95-ADC5-2C88F05B3FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A38E1D-4C19-4D95-ADC5-2C88F05B3FAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

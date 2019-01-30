@@ -10,4 +10,8 @@
         <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.5.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HealthChecks.Common\HealthChecks.Common.csproj" />
+    </ItemGroup>
+
 </Project>
