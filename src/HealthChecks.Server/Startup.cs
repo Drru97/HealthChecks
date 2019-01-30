@@ -40,6 +40,7 @@ namespace HealthChecks.Server
 
         private static void RegisterCommonDependencies(IServiceCollection services)
         {
+            services.AddTransient<ICommandOutputParser, CommandOutputParser>();
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<IStorageStatusProvider, StorageStatusProvider>();
         }

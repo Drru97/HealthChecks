@@ -8,15 +8,19 @@ namespace HealthChecks.Server.Services.Linux
     public class LinuxCpuStatusProvider : ICpuStatusProvider
     {
         private readonly ICommandExecutor _commandExecutor;
+        private readonly ICommandOutputParser _outputParser;
 
         private const string CpuLoadCommand = "cat /proc/loadavg";
+
+        //   private const string CpuInfoCommand = "cat /proc/cpuinfo";
         private const string CpuInfoCommand = "cat /proc/cpuinfo";
         private const string CpuNameAttribute = "model name";
         private const string CpuCoresAttribute = "processor";
 
-        public LinuxCpuStatusProvider(ICommandExecutor commandExecutor)
+        public LinuxCpuStatusProvider(ICommandExecutor commandExecutor, ICommandOutputParser outputParser)
         {
             _commandExecutor = commandExecutor;
+            _outputParser = outputParser;
         }
 
         public async Task<Cpu> GetCpuStatusAsync()
@@ -34,8 +38,12 @@ namespace HealthChecks.Server.Services.Linux
             var cpuInfoOutput = await _commandExecutor.ExecuteAsync(CpuInfoCommand);
             var cpuInfoLines = cpuInfoOutput.Output.Split(Environment.NewLine);
             // TODO: now we checks only first core
-            var cpuName = cpuInfoLines.First(el => el.Contains(CpuNameAttribute)).Substring(12).Trim();
-            var cpuCores = cpuInfoLines.Last(el => el.Contains(CpuCoresAttribute)).Substring(12).Trim();
+            var cpuInfo = new CpuInfo
+            {
+                Architecture = _outputParser.Parse(cpuInfoLines, "Architecture"),
+                Cores = int.Parse(_outputParser.Parse(cpuInfoLines, "Cores")),
+                Model = _outputParser.Parse(cpuInfoLines, "Model name")
+            };
 
             var cpu = new Cpu
             {
@@ -44,8 +52,7 @@ namespace HealthChecks.Server.Services.Linux
                 AverageUsageFor15M = double.Parse(loadParameters[2].Trim()),
                 RunningProcesses = int.Parse(loadParameters[3].Split('/').First()),
                 TotalProcesses = int.Parse(loadParameters[3].Split('/').Last()),
-                CpuName = cpuName,
-                Cores = int.Parse(cpuCores) + 1
+                CpuInfo = cpuInfo
             };
 
             return cpu;
