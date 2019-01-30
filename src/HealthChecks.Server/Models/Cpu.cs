@@ -2,8 +2,7 @@ namespace HealthChecks.Server.Models
 {
     public class Cpu
     {
-        public string CpuName { get; set; }
-        public int Cores { get; set; }
+        public double CurrentUsage { get; set; }
 
         public double AverageUsageFor1M { get; set; }
         public double AverageUsageFor5M { get; set; }
@@ -11,5 +10,7 @@ namespace HealthChecks.Server.Models
 
         public int RunningProcesses { get; set; }
         public int TotalProcesses { get; set; }
+
+        public CpuInfo CpuInfo { get; set; }
     }
 }
