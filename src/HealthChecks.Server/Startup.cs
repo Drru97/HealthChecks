@@ -1,7 +1,5 @@
 ﻿using System;
-using HealthChecks.Server.Services;
-using HealthChecks.Server.Services.Linux;
-using HealthChecks.Server.Services.Windows;
+using HealthChecks.Server.DiExtensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,41 +20,21 @@ namespace HealthChecks.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            RegisterCommonDependencies(services);
+            services.RegisterCommonDependencies();
 
             switch (Environment.OSVersion.Platform)
             {
                 case PlatformID.Unix:
-                    RegisterUnixDependencies(services);
+                    services.RegisterUnixDependencies();
                     break;
                 case PlatformID.Win32NT:
-                    RegisterWindowsDependencies(services);
+                    services.RegisterWindowsDependencies();
                     break;
                 default:
                     throw new PlatformNotSupportedException("Current platform is not supported.");
             }
-        }
-
-        private static void RegisterCommonDependencies(IServiceCollection services)
-        {
-            services.AddTransient<ICommandOutputParser, CommandOutputParser>();
-            services.AddTransient<IStatusService, StatusService>();
-            services.AddTransient<IStorageStatusProvider, StorageStatusProvider>();
-        }
-
-        private static void RegisterUnixDependencies(IServiceCollection services)
-        {
-            services.AddTransient<ICommandExecutor, BashCommandExecutor>();
-            services.AddTransient<IMemoryStatusProvider, LinuxMemoryStatusProvider>();
-            services.AddTransient<ICpuStatusProvider, LinuxCpuStatusProvider>();
-        }
-
-        private static void RegisterWindowsDependencies(IServiceCollection services)
-        {
-            // todo: register windows dependencies
-            services.AddTransient<ICpuStatusProvider, WindowsCpuStatusProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
